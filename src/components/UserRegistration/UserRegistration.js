@@ -1,5 +1,5 @@
 import React from "react";
-import "./UserRegistration.css";
+import Styles from "./UserRegistration.module.css";
 
 function CreateUser() {
   const [email, setEmail] = React.useState("");
@@ -12,13 +12,13 @@ function CreateUser() {
 
   return (
     <>
-      <div className="main">
-        <form onSubmit={handleSubmit}>
+      <div className={Styles.main}>
+        <form onSubmit={handleSubmit} className={Styles.form}>
           <h1>Create A User</h1>
           <br />
           <label>
             Name:
-            <input
+            <input className={Styles.input}
               name="Name"
               type="text"
               value={Name}
@@ -29,7 +29,7 @@ function CreateUser() {
           <br />
           <label>
             Email:
-            <input
+            <input className={Styles.input}
               name="email"
               type="email"
               value={email}
@@ -40,7 +40,7 @@ function CreateUser() {
           <br />
           <label>
             Password:
-            <input
+            <input className={Styles.input}
               name="Password"
               type="password"
               value={Password}
@@ -50,14 +50,14 @@ function CreateUser() {
           </label>
           <br />
           <label>
+            <input className={Styles.radio} name="Service Engineer" type="radio" />
             Service Engineer
-            <input name="Service Engineer" type="radio" />
           </label>
           <label>
+            <input className={Styles.radio} name="Customer" type="radio" />
             Customer
-            <input name="Customer" type="radio" />
           </label>
-          <button>Submit!</button>
+          <button className={Styles.button}>Submit!</button>
         </form>
       </div>
     </>

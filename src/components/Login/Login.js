@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/UserAction";
 
-const Login = (props) => {
+const Login = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) navigate("/user/");
+  }, [user, navigate]);
+
   const loginHandler = (event) => {
     event.preventDefault();
+    const user = {
+      name: "Akash",
+      type: "Admin",
+    };
+    dispatch(login(user));
   };
 
   const signupHandler = (event) => {
@@ -22,7 +38,8 @@ const Login = (props) => {
         if (res.data.token) {
           localStorage.setItem("user", JSON.stringify(res.data));
         }
-        return res.data;
+        // return res.data;
+        navigate("/user/");
       })
       .catch((err) => {
         console.log(err);
@@ -94,10 +111,10 @@ const Login = (props) => {
                     />
                   </div>
                   <div className="text">
-                    <a href="#">Forgot password?</a>
+                    <a href="/">Forgot password?</a>
                   </div>
                   <div className="button input-box">
-                    <input type="submit" value="Sumbit" />
+                    <input type="submit" value="Login" />
                   </div>
                   <div className="text sign-up-text">
                     Don't have an account?{" "}
@@ -141,7 +158,7 @@ const Login = (props) => {
                     />
                   </div>
                   <div className="button input-box">
-                    <input type="submit" value="Sumbit" />
+                    <input type="submit" value="Register" />
                   </div>
                   <div className="text sign-up-text">
                     Already have an account?{" "}

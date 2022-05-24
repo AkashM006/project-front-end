@@ -1,5 +1,5 @@
 import React from "react";
-import "./BookCall.css";
+import Styles from "./BookCall.module.css";
 
 function BookAServiceCall() {
   const [complaint, setComplaint] = React.useState("");
@@ -11,13 +11,13 @@ function BookAServiceCall() {
   };
 
   return (
-    <div className="main">
-      <form onSubmit={handleSubmit}>
-        <h1>Book A Service Call</h1>
+    <div className={Styles.main}>
+      <form onSubmit={handleSubmit} className={Styles.form}>
+        <h1 className={Styles.h1}>Book A Service Call</h1>
         <br />
         <label>
           Product:
-          <input
+          <input className={Styles.input}
             name="Product"
             type="text"
             value={Product}
@@ -28,7 +28,7 @@ function BookAServiceCall() {
         <br />
         <label>
           Complaint:
-          <input
+          <input className={Styles.input}
             name="complaint"
             type="text"
             value={complaint}
@@ -39,7 +39,7 @@ function BookAServiceCall() {
         <br />
         <label>
           Remarks:
-          <input
+          <input className={Styles.input}
             name="Remarks"
             type="text"
             value={Remarks}
@@ -48,7 +48,7 @@ function BookAServiceCall() {
           />
         </label>
         <br />
-        <button>Book!</button>
+        <button className={Styles.button}>Book!</button>
       </form>
     </div>
   );

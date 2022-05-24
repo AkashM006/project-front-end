@@ -4,14 +4,17 @@ import CallStatus from "../CallStatus/CallStatus";
 import CallAssign from "../CallAssign/CallAssign";
 import UserRegistration from "../UserRegistration/UserRegistration";
 import NavBar from "../NavBar/NavBar";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import Logout from "../Logout/Logout";
 
 export default function PrivateRoute() {
-  const [user, setUser] = useState({});
-  let navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user || Object.keys(user).length === 0) navigate("/login");
-  // }, []); // to check if the user exists
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) navigate("/login");
+    console.log("User", user);
+  }, [navigate, user]);
   return (
     <>
       <NavBar />
@@ -25,6 +28,7 @@ export default function PrivateRoute() {
         {/* the above route must be available only for admin */}
         <Route path="createuser" element={<UserRegistration />} />
         {/* the above route must be available only for admin, for creating new admins or engineers */}
+        <Route path="logout" element={<Logout />} />
       </Routes>
     </>
   );

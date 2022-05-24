@@ -3,7 +3,7 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
-export const SideBarData = [
+export const SidebarData = [
   {
     title: "Book a Service Call",
     path: "/user/book",
@@ -44,6 +44,12 @@ export const SideBarData = [
     title: "Create User",
     path: "/user/createuser",
     icon: <IoIcons.IoMdHelpCircle />,
+    cName: "nav-text",
+  },
+  {
+    title: "Log Out",
+    path: "/user/logout",
+    icon: <IoIcons.IoIosLogOut />,
     cName: "nav-text",
   },
 ];

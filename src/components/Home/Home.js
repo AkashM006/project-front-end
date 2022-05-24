@@ -1,54 +1,54 @@
-import "./Home.css";
+import Styles from "./Home.module.css";
 
 function Home() {
   return (
     <>
-      <header className="bg-image">
-        <div className="main__container">
+      <header className={Styles.bg_image}>
+        <div className={Styles.main__container}>
           <h1>Electronics</h1>
           <h2>Laptop | Computer | Hardwares</h2>
-          <a href="#" className="btn btn-transparent">
+          <a href="/" className={`${Styles.btn} ${Styles.btn_transparent}`}>
             Start Here.
           </a>
         </div>
       </header>
 
-      <section className="">
-        <div className="main__container">
-          <div className="col-3 text--center">
+      <section >
+        <div className={Styles.main__container}>
+          <div className={`${Styles.col_3} ${Styles.text_center}`}>
             <img
               src="https://media.4rgos.it/i/Argos/3319-m0014-m007-m050-asym-m008-m022-laptop-guide-248175189-hero?maxW=768&qlt=75&fmt=webp"
               alt=""
-              className="details-img--ball"
+              className={Styles.details_img_ball}
             />
           </div>
-          <div className="col-7 details">
+          <div className={`${Styles.col_7} ${Styles.details}`}>
             <h3>Products</h3>
             <p>Buy any product through us for additional discount</p>
           </div>
         </div>
       </section>
 
-      <section className="section--primary">
-        <div className="main__container">
-          <div className="col-3 features">
+      <section className={Styles.section_primary}>
+        <div className={Styles.main__container}>
+          <div className={`${Styles.col_3} ${Styles.features}`}>
             <i className="fa fa-bolt"></i>
             <p>New and quality hardwares</p>
           </div>
-          <div className="col-3 features">
+          <div className={`${Styles.col_3} ${Styles.features}`}>
             <i className="fa fa-bank"></i>
             <p>High availability of services 24/7</p>
           </div>
-          <div className="col-3 features">
+          <div className={`${Styles.col_3} ${Styles.features}`}>
             <i className="fa fa-heart"></i>
             <p>Customer Friendly</p>
           </div>
         </div>
       </section>
 
-      <section className="section--primary--light">
-        <div className="main__container">
-          <blockquote className="testimonial">
+      <section className={Styles.section_primary_light}>
+        <div className={Styles.main__container}>
+          <blockquote className={Styles.testimonial}>
             <p>
               We have always availed their services, even at peak times they
               were able to provide service on-spot sending the engineer to our
@@ -60,10 +60,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="section--primary--alt bg-image bg-image-2">
-        <div className="main__container text--center">
+      <section className={`${Styles.section_primary_alt} ${Styles.bg_image} ${Styles.bg_image2}`}>
+        <div className={`${Styles.main__container} ${Styles.text_center}`}>
           <h3>Why Us!</h3>
-          <div className="col-5 text--left">
+          <div className={`${Styles.col_5} ${Styles.text_left}`}>
             <ul>
               <li>We are the best</li>
               <li>On-spot service</li>
@@ -72,7 +72,7 @@ function Home() {
         <li>Its free!</li> */}
             </ul>
           </div>
-          <div className="col-5 text--left">
+          <div className={`${Styles.col_5} ${Styles.text_left}`}>
             <ul>
               <li>24/7 service</li>
               <li>1000+ happy Customers</li>
@@ -84,17 +84,17 @@ function Home() {
         </div>
       </section>
 
-      <section className="text--center">
-        <div className="main__container">
+      <section className={Styles.text_center}>
+        <div className={Styles.main__container}>
           <h3>We are happy to help!</h3>
-          <a href="#" className="btn">
+          <a href="/" className={Styles.btn}>
             Register and book a service now
           </a>
         </div>
       </section>
 
       <footer>
-        <div className="main__container">
+        <div className={Styles.main__container}>
           {/* <ul>
       <li><a href="#">Weblinks</a></li>
       <li><a href="#">Contact</a></li>

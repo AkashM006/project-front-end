@@ -1,5 +1,5 @@
 import React from 'react';
-import './Table.css'
+import Styles from './Table.module.css'
 
 function Table(props)
 {
