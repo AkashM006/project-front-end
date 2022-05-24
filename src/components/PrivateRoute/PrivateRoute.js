@@ -11,10 +11,12 @@ import Logout from "../Logout/Logout";
 export default function PrivateRoute() {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!user) navigate("/login");
     console.log("User", user);
   }, [navigate, user]);
+
   return (
     <>
       <NavBar />

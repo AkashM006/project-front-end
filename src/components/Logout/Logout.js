@@ -7,6 +7,7 @@ const Logout = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (user) {
       dispatch(logout());
