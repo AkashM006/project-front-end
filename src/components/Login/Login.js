@@ -3,7 +3,7 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions/UserAction";
+import { login, register } from "../../actions/UserAction";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const Login = () => {
   const loginHandler = (event) => {
     event.preventDefault();
     const user = {
-      name: "Akash",
-      type: "Admin",
+      email: lEmail,
+      password: lPassword,
     };
     dispatch(login(user));
   };
@@ -26,24 +26,30 @@ const Login = () => {
   const signupHandler = (event) => {
     event.preventDefault();
     // send post request to /register route
-    const data = {
+    // const data = {
+    //   email: sEmail,
+    //   password: sPassword,
+    //   name: sName,
+    //   type: 1,
+    // };
+    // axios
+    //   .post("http://localhost:3000/register", { data })
+    //   .then((res) => {
+    //     if (res.data.token) {
+    //       localStorage.setItem("user", JSON.stringify(res.data));
+    //     }
+    //     // return res.data;
+    //     navigate("/user/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    const user = {
       email: sEmail,
-      password: sPassword,
       name: sName,
-      type: 1,
+      password: sPassword,
     };
-    axios
-      .post("http://localhost:3000/register", { data })
-      .then((res) => {
-        if (res.data.token) {
-          localStorage.setItem("user", JSON.stringify(res.data));
-        }
-        // return res.data;
-        navigate("/user/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(register(user));
   };
 
   const [lEmail, setLemail] = useState("");
