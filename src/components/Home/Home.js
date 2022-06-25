@@ -1,28 +1,19 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Styles from "./Home.module.css";
 
 function Home() {
-  const user = useSelector((state) => state.auth.user);
   return (
     <>
       <header className={Styles.bg_image}>
         <div className={Styles.main__container}>
           <h1>Electronics</h1>
           <h2>Laptop | Computer | Hardwares</h2>
-          {/* <a href="/" className={`${Styles.btn} ${Styles.btn_transparent}`}>
+          <a href="/" className={`${Styles.btn} ${Styles.btn_transparent}`}>
             Start Here.
-          </a> */}
-          <Link
-            to={user ? "/" : "/login"}
-            className={`${Styles.btn} ${Styles.btn_transparent}`}
-          >
-            {user ? "Dashboard" : "Login"}
-          </Link>
+          </a>
         </div>
       </header>
 
-      <section>
+      <section >
         <div className={Styles.main__container}>
           <div className={`${Styles.col_3} ${Styles.text_center}`}>
             <img
@@ -69,9 +60,7 @@ function Home() {
         </div>
       </section>
 
-      <section
-        className={`${Styles.section_primary_alt} ${Styles.bg_image} ${Styles.bg_image2}`}
-      >
+      <section className={`${Styles.section_primary_alt} ${Styles.bg_image} ${Styles.bg_image2}`}>
         <div className={`${Styles.main__container} ${Styles.text_center}`}>
           <h3>Why Us!</h3>
           <div className={`${Styles.col_5} ${Styles.text_left}`}>

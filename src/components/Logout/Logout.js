@@ -1,18 +1,18 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../actions/UserAction";
+import { logout } from "../../actions/userActions";
 
-const Logout = () => {
-  const user = useSelector((state) => state.auth.user);
+function Logout() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
+  dispatch(logout());
+
   useEffect(() => {
-    if (user) {
-      dispatch(logout());
-    } else navigate("/");
-  }, [navigate, dispatch, user]);
-};
+    if (!user) navigate("/login");
+  });
+}
 
 export default Logout;

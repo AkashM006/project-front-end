@@ -3,53 +3,50 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, register } from "../../actions/UserAction";
+import { login } from "../../actions/userActions";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+const Login = (props) => {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate("/user/");
+    if (user) {
+      navigate("/user/");
+    }
   }, [user, navigate]);
 
   const loginHandler = (event) => {
     event.preventDefault();
-    const user = {
+    console.log("Login form submitted");
+    const data = {
       email: lEmail,
       password: lPassword,
     };
-    dispatch(login(user));
+    dispatch(login(data));
   };
 
   const signupHandler = (event) => {
     event.preventDefault();
     // send post request to /register route
-    // const data = {
-    //   email: sEmail,
-    //   password: sPassword,
-    //   name: sName,
-    //   type: 1,
-    // };
-    // axios
-    //   .post("http://localhost:3000/register", { data })
-    //   .then((res) => {
-    //     if (res.data.token) {
-    //       localStorage.setItem("user", JSON.stringify(res.data));
-    //     }
-    //     // return res.data;
-    //     navigate("/user/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    const user = {
+    const data = {
       email: sEmail,
-      name: sName,
       password: sPassword,
+      name: sName,
+      type: 1,
     };
-    dispatch(register(user));
+    axios
+      .post("http://localhost:3000/register", { data })
+      .then((res) => {
+        if (res.data.token) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+        }
+        // return res.data;
+        navigate("/user/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const [lEmail, setLemail] = useState("");
@@ -120,7 +117,7 @@ const Login = () => {
                     <a href="/">Forgot password?</a>
                   </div>
                   <div className="button input-box">
-                    <input type="submit" value="Login" />
+                    <input type="submit" value="Sumbit" />
                   </div>
                   <div className="text sign-up-text">
                     Don't have an account?{" "}
@@ -164,7 +161,7 @@ const Login = () => {
                     />
                   </div>
                   <div className="button input-box">
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="Sumbit" />
                   </div>
                   <div className="text sign-up-text">
                     Already have an account?{" "}

@@ -1,7 +1,11 @@
-export default function Loading() {
+import React from "react";
+
+function Loading() {
   return (
     <div>
-      <h1>Loading...</h1>
+      <h2>Loading...</h2>
     </div>
   );
 }
+
+export default Loading;
