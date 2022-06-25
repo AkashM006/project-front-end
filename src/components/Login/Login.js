@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
+import server from "../../constants";
 
 const Login = (props) => {
   const user = useSelector((state) => state.user);
@@ -18,12 +19,22 @@ const Login = (props) => {
 
   const loginHandler = (event) => {
     event.preventDefault();
-    console.log("Login form submitted");
     const data = {
       email: lEmail,
       password: lPassword,
     };
-    dispatch(login(data));
+    axios
+      .post(`${server}/login`, { data })
+      .then((res) => {
+        const userObject = {
+          token: res.data.token,
+          email: res.data.user.email,
+          type: res.data.user.type,
+          name: res.data.user.name,
+        };
+        dispatch(login(userObject));
+      })
+      .catch((err) => console.log(err));
   };
 
   const signupHandler = (event) => {
@@ -36,13 +47,15 @@ const Login = (props) => {
       type: 1,
     };
     axios
-      .post("http://localhost:3000/register", { data })
+      .post(`${server}/register`, { data })
       .then((res) => {
-        if (res.data.token) {
-          localStorage.setItem("user", JSON.stringify(res.data));
-        }
-        // return res.data;
-        navigate("/user/");
+        const userObject = {
+          token: res.data.token,
+          email: res.data.user.email,
+          type: res.data.user.type,
+          name: res.data.user.name,
+        };
+        dispatch(login(userObject));
       })
       .catch((err) => {
         console.log(err);

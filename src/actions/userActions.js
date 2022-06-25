@@ -12,12 +12,3 @@ export const logout = () => {
     type: "LOGOUT",
   };
 };
-
-export const register = (user) => {
-  return {
-    type: "REGISTER",
-    payload: {
-      user,
-    },
-  };
-};
