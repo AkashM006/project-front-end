@@ -4,14 +4,36 @@ import CallStatus from "../CallStatus/CallStatus";
 import CallAssign from "../CallAssign/CallAssign";
 import UserRegistration from "../UserRegistration/UserRegistration";
 import NavBar from "../Navbar/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import server from "../../constants";
+import { logout } from "../../actions/userActions";
+import { useDispatch } from "react-redux";
 
 export default function PrivateRoute() {
-  const [user, setUser] = useState({});
-  let navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user || Object.keys(user).length === 0) navigate("/login");
-  // }, []); // to check if the user exists
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`${server}`, { headers: { Authorization: user.token } })
+        .then((res) => {
+          console.log("Response: ", res.status);
+        })
+        .catch(async (err) => {
+          console.log("Error: ", err);
+          if (err.response.status === 401) dispatch(logout());
+        });
+    }
+  }, []);
+
   return (
     <>
       <NavBar />

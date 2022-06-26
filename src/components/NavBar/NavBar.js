@@ -28,7 +28,7 @@ function Navbar() {
               </Link>
             </li>
             {SidebarData.map((item, index) => {
-              if (item.allowedTypes.includes(user.type)) {
+              if (user && item.allowedTypes.includes(user.type)) {
                 return (
                   <li key={index} className={item.cName}>
                     <Link to={item.path}>

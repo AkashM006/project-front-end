@@ -113,6 +113,7 @@ const Login = (props) => {
                       value={lEmail}
                       onChange={(event) => setLemail(event.target.value)}
                       placeholder="Enter your email"
+                      autoFocus
                       required
                     />
                   </div>
