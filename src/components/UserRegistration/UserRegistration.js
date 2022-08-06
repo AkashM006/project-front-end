@@ -3,12 +3,15 @@ import React from "react";
 import Styles from "./UserRegistration.module.css";
 import server from "../../constants";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { logout } from "../../actions/userActions"
 
 function CreateUser() {
   const [email, setEmail] = React.useState("");
   const [Name, setName] = React.useState("");
   const [Password, setPassword] = React.useState("");
   const user = useSelector(state => state.user)
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,14 +20,24 @@ function CreateUser() {
       email,
       password: Password
     }
+    const token = user == null ? "" : user.token;
     axios
-      .post(`${server}/user`,{data},{headers:{"Authorization": user.token}})
+      .post(`${server}/user`, { data }, { headers: { "Authorization": token } })
       .then(res => {
-        console.log(res)
+        if (res.data.success === true) {
+          alert("User created successfully");
+          setEmail('');
+          setName('');
+          setPassword('');
+        }
       })
       .catch(err => {
-        console.log(err)
-  })
+        if (err.response.status === 401) {
+          alert('Session expired. Please login again');
+          dispatch(logout());
+        }
+        else console.log(err)
+      })
   };
 
   return (

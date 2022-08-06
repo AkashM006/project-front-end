@@ -18,25 +18,28 @@ export default function PrivateRoute() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user) {
+      navigate("/login");
+    }
   }, [user, navigate]);
 
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(`${server}`, { headers: { Authorization: user.token } })
-        .then((res) => {
-          // console.log("Response: ", res.status);
-        })
-        .catch(async (err) => {
-          console.log(err);
-          if (err.response.status === 401){
-            alert("Session expired. Please login again!");
-            dispatch(logout());
-          } 
-        });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     axios
+  //       .get(`${server}`, { headers: { Authorization: user.token } })
+  //       .then((res) => {
+  //         // console.log("Response: ", res.status);
+  //       })
+  //       .catch(async (err) => {
+  //         // console.log("Error" + err);
+  //         if (err.response.status === 401) {
+  //           alert("Session expired. Please login again!");
+  //           dispatch(logout());
+  //           navigate('/login');
+  //         }
+  //       });
+  //   }
+  // }, []);
 
   return (
     <>
@@ -46,6 +49,7 @@ export default function PrivateRoute() {
         <Route path="/book" element={<BookCall />} />
         {/* booking call must be available for all but must only render if logged in */}
         <Route path="/calls/" element={<CallStatus />} />
+        {/* Brief detail about the call */}
         <Route path="/calls/:id" element={<Call />} />
         {/* this is available from all the users, but must be logged in */}
         <Route path="/assign" element={<CallAssign />} />

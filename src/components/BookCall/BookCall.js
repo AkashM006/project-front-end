@@ -15,43 +15,44 @@ function BookAServiceCall() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    if(!user){
-      alert("Your session expired, Please login again!");
+  useEffect(() => {
+    if (!user) {
       dispatch(logout());
     }
-    if(user && user.type!==1){
+    if (user && user.type !== 1) {
       navigate('/');
     }
-  },[user,navigate])
+  }, [user, navigate])
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     const data = {
-      email:user.email,
+      email: user.email,
       products: Product,
       complaint,
       remarks: Remarks
     }
 
-    axios.post(`${server}/call`,{data},{headers:{"Authorization": user.token}},)
-    .then(res => {
-      if(res.data.success){
-        alert(res.data.msg);
-        setComplaint("");
-        setProduct("");
-        setRemarks("");
-      }else alert("Something went wrong while booking please try again!");
-    })
-    .catch(err => {
-      if(err.response.status === 401){
-        dispatch(logout());
-      }else{
-        alert("Something went wrong please try again!")
-        console.log(err);
-      }
-    })
+    const token = user == null ? '' : user.token;
+
+    axios.post(`${server}/call`, { data }, { headers: { "Authorization": token } },)
+      .then(res => {
+        if (res.data.success) {
+          alert(res.data.msg);
+          setComplaint("");
+          setProduct("");
+          setRemarks("");
+        } else alert("Something went wrong while booking please try again!");
+      })
+      .catch(err => {
+        if (err.response.status === 401) {
+          dispatch(logout());
+        } else {
+          alert("Something went wrong please try again!")
+          console.log(err);
+        }
+      })
   };
 
   return (
