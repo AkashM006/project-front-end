@@ -18,7 +18,8 @@ export default function Call() {
             .then(res => {
                 if (res.data.call) {
                     setCall(res.data.call);
-                    if (res.data.call.user.email !== user.email) navigate('/calls')
+                    if (user.type !== 3 && res.data.call.user.email !== user.email) navigate('/user/calls')
+                    console.log(res.data.call)
                 }
             })
             .catch(err => {
@@ -27,9 +28,17 @@ export default function Call() {
                     dispatch(logout());
                 } else console.log(err);
             })
-    }, [])
-    console.log(call);
+    }, []);
+
     return (
+        // Required Fields:
+        // User name
+        // complaint
+        // product
+        // remarks
+        // engineer name
+        // status
+        // booked at time
         <h1>Details about your call</h1>
     )
 }
