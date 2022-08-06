@@ -1,13 +1,30 @@
+import axios from "axios";
 import React from "react";
 import Styles from "./UserRegistration.module.css";
+import server from "../../constants";
+import { useSelector } from "react-redux";
 
 function CreateUser() {
   const [email, setEmail] = React.useState("");
   const [Name, setName] = React.useState("");
   const [Password, setPassword] = React.useState("");
+  const user = useSelector(state => state.user)
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = {
+      name: Name,
+      email,
+      password: Password
+    }
+    axios
+      .post(`${server}/user`,{data},{headers:{"Authorization": user.token}})
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+  })
   };
 
   return (
@@ -49,14 +66,14 @@ function CreateUser() {
             />
           </label>
           <br />
-          <label>
+          {/* <label>
             <input className={Styles.radio} name="Service Engineer" type="radio" />
             Service Engineer
           </label>
           <label>
             <input className={Styles.radio} name="Customer" type="radio" />
             Customer
-          </label>
+          </label> */}
           <button className={Styles.button}>Submit!</button>
         </form>
       </div>

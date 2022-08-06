@@ -13,7 +13,7 @@ export const SidebarData = [
   },
   {
     title: "Service Calls Status",
-    path: "/user/status",
+    path: "/user/calls",
     icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
     allowedTypes: [1, 2, 3],

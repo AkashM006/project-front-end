@@ -1,30 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Styles from "./BookCall.module.css";
 import server from "../../constants";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 function BookAServiceCall() {
   const [complaint, setComplaint] = React.useState("");
   const [Product, setProduct] = React.useState("");
   const [Remarks, setRemarks] = React.useState("");
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    if(user.type!==1){
+      navigate('/');
+    }
+  },[user,navigate])
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     const data = {
       email:user.email,
       products: Product,
       complaint,
       remarks: Remarks
     }
-    console.log("User token: "+user.token)
+
     axios.post(`${server}/call`,{data},{headers:{"Authorization": user.token}},)
     .then(res => {
-      console.log(res)
+      // console.log(res)
+      if(res.data.success){
+        alert(res.data.msg);
+      }else alert("Something went wrong while booking please try again!");
     })
     .catch(err => {
       console.log(err)
+      alert(err.data.msg)
     })
   };
 
