@@ -39,6 +39,10 @@ export default function Call() {
         // engineer name
         // status
         // booked at time
+
+        // todo: if it is the user then some fields can be editable
+        // todo: else if it is the corresponding service engineer then make everything un editable
+        // todo: else if it admin then make the service engineer field alone editable
         <h1>Details about your call</h1>
     )
 }
