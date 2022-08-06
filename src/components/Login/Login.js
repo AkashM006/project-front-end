@@ -34,7 +34,10 @@ const Login = (props) => {
         };
         dispatch(login(userObject));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if(err.response.status === 400)alert(err.response.data.msg)
+        else console.log(err)
+      });
   };
 
   const signupHandler = (event) => {
@@ -58,7 +61,8 @@ const Login = (props) => {
         dispatch(login(userObject));
       })
       .catch((err) => {
-        console.log(err);
+        if(err.response.status === 401)alert(err.response.data.msg);
+        else console.log(err);
       });
   };
 

@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Styles from "./BookCall.module.css";
 import server from "../../constants";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../actions/userActions";
 
 
 function BookAServiceCall() {
@@ -12,9 +13,14 @@ function BookAServiceCall() {
   const [Remarks, setRemarks] = React.useState("");
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(()=> {
-    if(user.type!==1){
+    if(!user){
+      alert("Your session expired, Please login again!");
+      dispatch(logout());
+    }
+    if(user && user.type!==1){
       navigate('/');
     }
   },[user,navigate])
@@ -31,14 +37,20 @@ function BookAServiceCall() {
 
     axios.post(`${server}/call`,{data},{headers:{"Authorization": user.token}},)
     .then(res => {
-      // console.log(res)
       if(res.data.success){
         alert(res.data.msg);
+        setComplaint("");
+        setProduct("");
+        setRemarks("");
       }else alert("Something went wrong while booking please try again!");
     })
     .catch(err => {
-      console.log(err)
-      alert(err.data.msg)
+      if(err.response.status === 401){
+        dispatch(logout());
+      }else{
+        alert("Something went wrong please try again!")
+        console.log(err);
+      }
     })
   };
 
