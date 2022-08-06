@@ -2,7 +2,7 @@ import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import autoMergeLevel1 from "redux-persist/es/stateReconciler/autoMergeLevel1";
 import storage from "redux-persist/lib/storage";
-import reducer from "./userReducer";
+import reducer from "./UserReducer";
 
 const persistConfig = {
   key: "auth",

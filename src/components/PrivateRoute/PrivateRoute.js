@@ -3,7 +3,7 @@ import BookCall from "../BookCall/BookCall";
 import CallStatus from "../CallStatus/CallStatus";
 import CallAssign from "../CallAssign/CallAssign";
 import UserRegistration from "../UserRegistration/UserRegistration";
-import NavBar from "../Navbar/Navbar";
+import NavBar from "../NavBar/NavBar";
 import { useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";

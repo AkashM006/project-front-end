@@ -1,13 +1,31 @@
 import React from "react";
 import Styles from "./BookCall.module.css";
+import server from "../../constants";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 function BookAServiceCall() {
   const [complaint, setComplaint] = React.useState("");
   const [Product, setProduct] = React.useState("");
   const [Remarks, setRemarks] = React.useState("");
+  const user = useSelector((state) => state.user);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = {
+      email:user.email,
+      products: Product,
+      complaint,
+      remarks: Remarks
+    }
+    console.log("User token: "+user.token)
+    axios.post(`${server}/call`,{data},{headers:{"Authorization": user.token}},)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   };
 
   return (
