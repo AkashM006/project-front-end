@@ -21,6 +21,35 @@ function Call() {
     const [status, setStatus] = React.useState();
     const [date, setDate] = React.useState();
 
+    const [engineers, setEngineers] = React.useState([]);
+
+    const [prompt, setPrompt] = React.useState(0);
+
+    const finishHandler = (event) => {
+        event.preventDefault();
+        // need to mark the call as finished and then get the feedback
+        const data = {
+            engineerEmail: EngineerName,
+            callId: id,
+            products: Product,
+            remarks: Remarks,
+            complaint,
+            status: 1
+        }
+        setStatus(1);
+        const token = user == null ? "" : user.token;
+        axios.put(`${server}/call`, { data }, { headers: { "Authorization": token } })
+            .then(res => {
+                setProduct(1);
+                // todo: Here we need to prompt to get rating from the user
+            })
+            .catch(err => {
+                if (err.response.status === 401) {
+                    dispatch(logout());
+                } else console.log(err);
+            })
+    }
+
     // todo: start from here, get info from the backend about the call and change it
     useEffect(() => {
         if (!user) navigate('/login');
@@ -31,6 +60,7 @@ function Call() {
                     if (user.type !== 3 && res.data.call.user.email !== user.email) navigate('/user/calls');
 
                     const call = res.data.call;
+                    // console.log(call)
                     setComplaint(call.complaint);
                     setProduct(call.products);
                     setRemarks(call.remarks);
@@ -49,6 +79,17 @@ function Call() {
             })
     }, [user]);
 
+    useEffect(() => {
+        if (!user) navigate('/login');
+        const token = user == null ? '' : user.token;
+        axios.get(`${server}/user/2`, { headers: { "Authorization": token } })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log("Error: " + err);
+            })
+    }, [user]);
 
     return (
         // Required Fields:
@@ -74,6 +115,7 @@ function Call() {
                         type="text"
                         value={UserName}
                         onChange={(e) => setUserName(e.target.value)}
+                        disabled
                         required
                     />
                 </label>}
@@ -84,6 +126,7 @@ function Call() {
                         type="text"
                         value={Product}
                         onChange={(e) => setProduct(e.target.value)}
+                        disabled={user.type === 1 ? false : true}
                         required
                     />
                 </label>
@@ -94,6 +137,7 @@ function Call() {
                         name="complaint"
                         type="text"
                         value={complaint}
+                        disabled={user.type === 1 ? false : true}
                         onChange={(e) => setComplaint(e.target.value)}
                         required
                     />
@@ -105,6 +149,7 @@ function Call() {
                         name="Remarks"
                         type="text"
                         value={Remarks}
+                        disabled={user.type === 1 ? false : true}
                         onChange={(e) => setRemarks(e.target.value)}
                         required
                     />
@@ -116,6 +161,7 @@ function Call() {
                         name="Product"
                         type="text"
                         value={EngineerName}
+                        disabled={user.type === 3 ? false : true}
                         onChange={(e) => setEngineerName(e.target.value)}
                         required
                     />
@@ -134,6 +180,7 @@ function Call() {
                 </label>
 
                 {user.type !== 2 && <button className={Styles.button}>Update</button>}
+                {user.type === 1 && <button className={Styles.button} onClick={finishHandler}>Mark as finish</button>}
             </form>}
         </div>
     );

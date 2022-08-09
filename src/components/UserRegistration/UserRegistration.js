@@ -33,7 +33,7 @@ function CreateUser() {
       })
       .catch(err => {
         if (err.response.status === 401) {
-          alert('Session expired. Please login again');
+          // alert('Session expired. Please login again');
           dispatch(logout());
         }
         else console.log(err)
