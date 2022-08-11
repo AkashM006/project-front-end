@@ -19,6 +19,7 @@ export default function CallStatus() {
       .get(`${server}/call`, { headers: { "Authorization": token } })
       .then(res => {
         if (res.data.calls) {
+          console.log(res.data.calls);
           setCalls(res.data.calls);
         }
       })
@@ -61,8 +62,8 @@ export default function CallStatus() {
           {calls.map(call => {
             return (<tr key={call.id}>
               <td>{call.complaint}</td>
-              <td>{call.status === 1 ? 'Finsihed' : 'Pending'}</td>
-              <td>{call.engineer === null ? 'Not assigned' : call.engineer}</td>
+              <td>{call.status === 1 ? 'Finished' : 'Pending'}</td>
+              <td>{call.engineer === null ? 'Not assigned' : call.engineer.name}</td>
               <td className={Styles.main}>
                 <Link to={`/user/calls/${call.id}`}>
                   <input className={Styles.button} value='View' type='button' />
@@ -74,6 +75,35 @@ export default function CallStatus() {
         </tbody>
       </table>
     );
+  }
+
+  if (user && user.type === 2) {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <th>Booked At</th>
+            <th>Complaint Description</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>View</th>
+          </tr>
+          {calls.map(call => {
+            return (<tr key={call.id}>
+              <td>{new Date(call.createdAt).toLocaleDateString('en-GB')}</td>
+              <td>{call.complaint}</td>
+              <td>{call.user.name}</td>
+              <td>{call.status === 1 ? 'Finsihed' : 'Pending'}</td>
+              <td className={Styles.main}>
+                <Link to={`/user/calls/${call.id}`}>
+                  <input className={Styles.button} value='View' type='button' />
+                </Link>
+              </td>
+            </tr>)
+          })}
+        </tbody>
+      </table>
+    )
   }
 
   if (user && user.type === 3) {
@@ -100,9 +130,9 @@ export default function CallStatus() {
             return (<tr key={call.id}>
               <td>{new Date(call.createdAt).toLocaleDateString('en-GB')}</td>
               <td>{call.complaint}</td>
-              <td>Akash</td>
+              <td>{call.user.name}</td>
               <td>{call.status === 1 ? 'Finsihed' : 'Pending'}</td>
-              <td>{call.engineer === null ? 'Not assigned' : call.engineer}</td>
+              <td>{call.engineer === null ? 'Not assigned' : call.engineer.name}</td>
               <td className={Styles.main}>
                 <Link to={`/user/calls/${call.id}`}>
                   <input className={Styles.button} value='View' type='button' />

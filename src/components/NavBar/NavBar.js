@@ -6,6 +6,7 @@ import { SidebarData } from "./SideBarData";
 import "./NavBar.css";
 import { IconContext } from "react-icons";
 import { useSelector } from "react-redux";
+import * as IoIcons from "react-icons/io";
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -27,6 +28,12 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            <li className="nav-text" style={{ color: 'white' }}>
+              <Link to='#'>
+                <IoIcons.IoMdPerson />
+                <span>{user.name}</span>
+              </Link>
+            </li>
             {SidebarData.map((item, index) => {
               if (user && item.allowedTypes.includes(user.type)) {
                 return (
@@ -38,7 +45,6 @@ function Navbar() {
                   </li>
                 );
               }
-              return;
             })}
           </ul>
         </nav>

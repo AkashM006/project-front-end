@@ -1,5 +1,4 @@
 import React from "react";
-import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
@@ -36,19 +35,26 @@ export const SidebarData = [
   //   icon: <FaIcons.FaEnvelopeOpenText />,
   //   cName: "nav-text",
   // },
-  {
-    title: "Alloted Service Calls",
-    path: "/user/calls",
-    icon: <IoIcons.IoMdHelpCircle />,
-    cName: "nav-text",
-    allowedTypes: [2, 3],
-  },
+  // {
+  //   title: "Alloted Service Calls",
+  //   path: "/user/calls",
+  //   icon: <IoIcons.IoMdHelpCircle />,
+  //   cName: "nav-text",
+  //   allowedTypes: [2],
+  // },
   {
     title: "Create User",
     path: "/user/createuser",
     icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
     allowedTypes: [3],
+  },
+  {
+    title: 'Report',
+    path: '/report',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'nav-text',
+    allowedTypes: [3]
   },
   {
     title: "Logout",
