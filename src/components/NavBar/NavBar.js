@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SidebarData } from "./SideBarData";
 import "./NavBar.css";
 import { IconContext } from "react-icons";
@@ -12,6 +12,11 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const user = useSelector((state) => state.user);
   const showSidebar = () => setSidebar(!sidebar);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user == null) navigate('/login');
+  }, [user])
 
   return (
     <>
@@ -31,7 +36,7 @@ function Navbar() {
             <li className="nav-text" style={{ color: 'white' }}>
               <Link to='/user/profile'>
                 <IoIcons.IoMdPerson />
-                <span>{user.name}</span>
+                <span>{user && user.name}</span>
               </Link>
             </li>
             {SidebarData.map((item, index) => {

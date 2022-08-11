@@ -16,7 +16,7 @@ function Engineer() {
 
     useEffect(() => {
         if (user.type !== 3) navigate("/user");
-        if (user == null) dispatch(logout());
+        if (user == null) navigate('/login')
         const token = user == null ? '' : user.token;
         axios.get(`${server}/report/engineer/${id}`, { headers: { "Authorization": token } })
             .then(res => {

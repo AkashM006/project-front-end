@@ -17,7 +17,7 @@ function BookAServiceCall() {
 
   useEffect(() => {
     if (!user) {
-      dispatch(logout());
+      navigate('/login');
     }
     if (user && user.type !== 1) {
       navigate('/');
