@@ -216,14 +216,6 @@ function Call() {
 
                     {user.type !== 2 && <label>
                         Engineer Name:
-                        {/* <input className={Styles.input}
-                            name="Product"
-                            type="text"
-                            value={EngineerName}
-                            disabled={user.type === 3 ? false : true}
-                            onChange={(e) => setEngineerName(e.target.value)}
-                            required
-                        /> */}
                         {user.type === 1 && <label> {engineer ? engineer.name : <label style={{ color: 'red' }}>Not Assigned</label>}</label>}
                         {user.type === 3 && <select className={Styles.input}
                             value={EngineerName}

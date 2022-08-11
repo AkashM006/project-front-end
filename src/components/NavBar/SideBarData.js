@@ -51,7 +51,7 @@ export const SidebarData = [
   },
   {
     title: 'Report',
-    path: '/report',
+    path: '/user/report',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text',
     allowedTypes: [3]

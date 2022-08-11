@@ -11,6 +11,8 @@ import server from "../../constants";
 import { logout } from "../../actions/userActions";
 import { useDispatch } from "react-redux";
 import Call from "../Call/Call";
+import Report from "../Report/Report"
+import Engineer from "../Engineer/Engineer";
 
 export default function PrivateRoute() {
   const navigate = useNavigate();
@@ -56,7 +58,29 @@ export default function PrivateRoute() {
         {/* the above route must be available only for admin */}
         <Route path="/createuser" element={<UserRegistration />} />
         {/* the above route must be available only for admin, for creating new admins or engineers */}
+        <Route path="/report" element={<Report />} />
+        {/* The above route must be available only for admins, for displaying details about the engineers */}
+        <Route path="/report/:id" element={<Engineer />} />
+        {/* The above route must available only for admins, for displaying detailed information about engineers */}
+        <Route path="/" element={<Dashboard />} exact />
       </Routes>
     </>
   );
+}
+
+function Dashboard() {
+  const user = useSelector(state => state.user);
+  return (
+    <>
+      <h1 style={{
+        'textAlign': 'center', 'fontFamily': ["Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue",
+          'sans-serif'],
+        'fontSize': '2em',
+        'fontWeight': '500',
+        'marginTop': '0.25em',
+        'color': '#222',
+        'letterSpacing': '2px'
+      }}>Welcome, {user.name}!</h1>
+    </>
+  )
 }
