@@ -93,7 +93,7 @@ export default function CallStatus() {
               <td>{new Date(call.createdAt).toLocaleDateString('en-GB')}</td>
               <td>{call.complaint}</td>
               <td>{call.user.name}</td>
-              <td>{call.status === 1 ? 'Finsihed' : 'Pending'}</td>
+              <td>{call.status === 1 ? 'Finished' : 'Pending'}</td>
               <td className={Styles.main}>
                 <Link to={`/user/calls/${call.id}`}>
                   <input className={Styles.button} value='View' type='button' />
@@ -131,7 +131,7 @@ export default function CallStatus() {
               <td>{new Date(call.createdAt).toLocaleDateString('en-GB')}</td>
               <td>{call.complaint}</td>
               <td>{call.user.name}</td>
-              <td>{call.status === 1 ? 'Finsihed' : 'Pending'}</td>
+              <td>{call.status === 1 ? 'Finished' : 'Pending'}</td>
               <td>{call.engineer === null ? 'Not assigned' : call.engineer.name}</td>
               <td className={Styles.main}>
                 <Link to={`/user/calls/${call.id}`}>

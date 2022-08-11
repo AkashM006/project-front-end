@@ -29,7 +29,7 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-text" style={{ color: 'white' }}>
-              <Link to='#'>
+              <Link to='/user/profile'>
                 <IoIcons.IoMdPerson />
                 <span>{user.name}</span>
               </Link>

@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import Call from "../Call/Call";
 import Report from "../Report/Report"
 import Engineer from "../Engineer/Engineer";
+import Profile from "../Profile/Profile";
 
 export default function PrivateRoute() {
   const navigate = useNavigate();
@@ -62,7 +63,10 @@ export default function PrivateRoute() {
         {/* The above route must be available only for admins, for displaying details about the engineers */}
         <Route path="/report/:id" element={<Engineer />} />
         {/* The above route must available only for admins, for displaying detailed information about engineers */}
+        <Route path="/profile" element={<Profile />} />
+        {/* The above route is for all users, for updating user details */}
         <Route path="/" element={<Dashboard />} exact />
+        {/* The above page is just to show some data in the blank page */}
       </Routes>
     </>
   );
@@ -73,8 +77,8 @@ function Dashboard() {
   return (
     <>
       <h1 style={{
-        'textAlign': 'center', 'fontFamily': ["Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue",
-          'sans-serif'],
+        'textAlign': 'center',
+        'fontFamily': ["Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue", 'sans-serif'],
         'fontSize': '2em',
         'fontWeight': '500',
         'marginTop': '0.25em',
